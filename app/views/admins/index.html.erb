@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Page</title>
+  </head>
+  <body>
+    <h1>This is All Admins index.html.erb</h1>
+
+
+
+<%= link_to "New Admin", new_admin_path %>
+
+
+
+
+<ul>
+  <% @admins.each do |admin| %>
+    <li>
+        <%= link_to admin.name, admin_path(admin)%>
+    </li>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

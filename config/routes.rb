@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  # this goes to the admins controller index page/home page 
+  root 'admins#index'
+
+  resources :admins
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

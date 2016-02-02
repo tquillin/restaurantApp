@@ -1,6 +1,5 @@
 <h3>here is <%= @admin.name %></h3>
 
-
 <%= link_to "Home Page", admins_path %>
 <%= button_to "Edit", edit_admin_path(@admin), method: :get %>
-<%= button_to "Delete", admin_path(@admin), method: :delete %>
+<%= button_to "Log out", admin_path(@admin), method: :delete %>

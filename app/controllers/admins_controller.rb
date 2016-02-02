@@ -1,53 +1,35 @@
 class AdminsController < ApplicationController
+
   def index
     @admins = Admin.all
   end
 
-  def create
-    @admin = Admin.create(admin_params)
-      redirect_to admin_path(@admin)
+  def new
+    @admin = Admin.new
   end
 
-    def new
-      # authenticate!
-      @admin = Admin.new
+  def create
+    @admin = Admin.create(admin_params)
+    if @admin.save
+      log_in @admin
+      flash[:success] = "Welcome!"
+        redirect_to @admin
+    else
+      render "new"
     end
+  end
 
-    # def log_in
-    #     admin = Admin.find_by(username: params[:username])
-    #     if admin && admin.authenticate(params[:password])
-    #       session[:admin_id] = admin.id
-    #       redirect_to admins_path
-    #     else
-    #       redirect_to admin_path(@admin)
-    #     end
-    #   end
-
-
-    def show
-      @admin = Admin.find(params[:id])
-    end
-
-   def edit
-     @admin = Admin.find(params[:id])
-   end
-
-
-  def update
-  admin = Admin.find(params[:id])
-    admin.update(admin_params)
-    redirect_to admin_path(admin)
+  def show
+    @admin = Admin.find(params[:id])
   end
 
   def destroy
-    admin = Admin.delete(params[:id])
-      redirect_to admins_path
+    # log_out if logged_in?
+    # # log_out
+    Admin.delete(params[:id])
+    @admin = Admin.all
+    render 'new'
   end
-
-  # def destroy
-  #   admin = Admin.find(@current_admin)
-  #     redirect_to admins_path
-  #   end
 
 private
   def admin_params
